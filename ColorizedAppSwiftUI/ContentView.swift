@@ -31,12 +31,9 @@ struct ContentView: View {
                         RoundedRectangle(cornerRadius: 15).stroke(Color.white, lineWidth: 5)
                     )
                 
-                ColorSliderView(sliderValue: $redSliderValue)
-                    .tint(.red)
-                ColorSliderView(sliderValue: $greenSliderValue)
-                    .tint(.green)
-                ColorSliderView(sliderValue: $blueSliderValue)
-                    .tint(.blue)
+                ColorSliderView(tint: .red, sliderValue: $redSliderValue)
+                ColorSliderView(tint: .green, sliderValue: $greenSliderValue)
+                ColorSliderView(tint: .blue, sliderValue: $blueSliderValue)
                 
                 Spacer()
             }
@@ -51,6 +48,7 @@ struct ContentView: View {
 }
 
 struct ColorSliderView: View {
+    @State var tint: Color
     @Binding var sliderValue: Double
     
     var body: some View {
@@ -58,6 +56,7 @@ struct ColorSliderView: View {
             Text(lround(sliderValue).formatted())
                 .foregroundStyle(.white)
             Slider(value: $sliderValue, in: 0...255, step: 1)
+                .tint(tint)
         }
     }
 }
